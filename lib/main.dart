@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/constants.dart';
+import 'package:pokedex/models/pokemon.dart';
 import 'package:pokedex/services/asset_manager.dart';
 
 void main() {
@@ -12,6 +13,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    List<Pokemon> pokemon = [
+      Pokemon("Pikachu", 001, AssetManager.picachu),
+      Pokemon("Pikachu", 002, AssetManager.picachu),
+      Pokemon("Pikachu", 003, AssetManager.picachu),
+      Pokemon("Pikachu", 004, AssetManager.picachu),
+      Pokemon("Pikachu", 005, AssetManager.picachu),
+      Pokemon("Pikachu", 006, AssetManager.picachu),
+      Pokemon("Pikachu", 007, AssetManager.picachu),
+      Pokemon("Pikachu", 008, AssetManager.picachu),
+      Pokemon("Pikachu", 009, AssetManager.picachu),
+      Pokemon("Pikachu", 010, AssetManager.picachu),
+      Pokemon("Pikachu", 011, AssetManager.picachu),
+      Pokemon("Pikachu", 012, AssetManager.picachu),
+      Pokemon("Pikachu", 013, AssetManager.picachu),
+      Pokemon("Pikachu", 014, AssetManager.picachu),
+      Pokemon("Pikachu", 015, AssetManager.picachu),
+      Pokemon("Pikachu", 016, AssetManager.picachu),
+    ];
+
     return MaterialApp(
         title: 'Pokedex',
         theme: ThemeData(
@@ -84,15 +104,42 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Container(
                       // height: 100,
-
+                      padding: EdgeInsets.all(15),
                       width: double.infinity,
                       color: white,
-                      child: Text("Testing"),
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                        ),
+                        itemCount: pokemon.length,
+                        itemBuilder: ((context, index) {
+                          return Card(
+                            elevation: 10,
+                            color: Colors.white,
+                            child: Column(children: [
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Text(
+                                  pokemon[index].number.toString(),
+                                ),
+                              ),
+                              Image.asset(AssetManager.picachu),
+                              Expanded(
+                                child: Container(
+                                  width: double.infinity,
+                                  color: Colors.green,
+                                  child: Text(pokemon[index].name),
+                                ),
+                              )
+                            ]),
+                          );
+                        }),
+                      ),
                     ),
                   ),
                 )
